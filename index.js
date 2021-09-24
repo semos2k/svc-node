@@ -31,7 +31,7 @@ http.createServer(async function (req, res) {
 
         response.on('end', () => {
             res.setHeader('Content-Type', 'application/json');
-            res.write(data);
+            res.write(data.replace('}', ', "test": "nuevo" }'));
             res.end();
         });
     })
