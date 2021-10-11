@@ -12,21 +12,25 @@ type Result<T> = std::result::Result<T, GenericError>;
 
 async fn hello(mut _req: Request<Body>, client: Client<HttpConnector>) 
         -> Result<Response<Body>> {
-    let api_hostname = var("SVC_API_HOSTNAME").unwrap_or("localhost".to_string());
-    let api_port = var("SVC_API_PORT").unwrap_or("4000".to_string());
+    if _req.uri().path() == "/healthz" {
+        Ok(Response::new(Body::from("Ok")))
+    }else{
+        let api_hostname = var("SVC_API_HOSTNAME").unwrap_or("localhost".to_string());
+        let api_port = var("SVC_API_PORT").unwrap_or("4000".to_string());
 
-    let uri_string = format!(
-        "http://{}:{}{}",
-        api_hostname, api_port,
-        _req.uri()
-            .path_and_query()
-            .unwrap()
-    );
-    let uri = uri_string.parse().unwrap();
-    *_req.uri_mut() = uri;
-    let web_res = client.request(_req).await?;
+        let uri_string = format!(
+            "http://{}:{}{}",
+            api_hostname, api_port,
+            _req.uri()
+                .path_and_query()
+                .unwrap()
+        );
+        let uri = uri_string.parse().unwrap();
+        *_req.uri_mut() = uri;
+        let web_res = client.request(_req).await?;
 
-    Ok(Response::new(web_res.into_body()))
+        Ok(Response::new(web_res.into_body()))
+    }
 }
 
 #[tokio::main]
