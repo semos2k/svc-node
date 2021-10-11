@@ -47,7 +47,7 @@ pub async fn main() -> Result<()> {
         }
     });
 
-    let addr = ([127, 0, 0, 1], 5000).into();
+    let addr = ([0, 0, 0, 0], 5000).into();
     let server = Server::bind(&addr).serve(make_svc);
     let api_hostname = var("SVC_API_HOSTNAME").unwrap_or("localhost".to_string());
     let api_port = var("SVC_API_PORT").unwrap_or("4000".to_string());
