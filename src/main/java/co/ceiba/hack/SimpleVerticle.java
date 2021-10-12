@@ -20,18 +20,24 @@ public class SimpleVerticle extends AbstractVerticle {
         WebClient client = WebClient.create(vertx);
 
         vertx.createHttpServer().requestHandler(req -> {
-            client.get(SVC_API_PORT, SVC_API_HOSTNAME, "/").send(ar -> {
-                if (ar.succeeded()) {
-                    HttpResponse<Buffer> response = ar.result();
-                    String resp = response.body().toString("ISO-8859-1");
+            String path = req.path().toString();
 
-                    System.out.println(resp);
-                    req.response().end(resp);
-                } else {
-                    req.response().setStatusCode(500).end();
-                    ar.cause().printStackTrace();
-                }
-            });
+            if( "/healthz".equals(path) ){
+                req.response().setStatusCode(200).end("OK");
+            }else {
+                client.get(SVC_API_PORT, SVC_API_HOSTNAME, "/?" + req.query()).send(ar -> {
+                    if (ar.succeeded()) {
+                        HttpResponse<Buffer> response = ar.result();
+                        String resp = response.body().toString("ISO-8859-1");
+
+                        System.out.println(resp);
+                        req.response().end(resp);
+                    } else {
+                        req.response().setStatusCode(500).end();
+                        ar.cause().printStackTrace();
+                    }
+                });
+            }
         }).listen(5000, listenResult -> {
             if (listenResult.failed()) {
                 System.out.println("Could not start HTTP server");
