@@ -1,13 +1,12 @@
-FROM node:13.7.0-alpine3.10
+FROM gradle:7.2.0-jdk11 as builder
+WORKDIR /usr/src/app
+COPY --chown=gradle:gradle . /usr/src/app
+WORKDIR /usr/src/app
+RUN gradle build
 
-#=======================
-# General Configuration
-#=======================
+FROM openjdk:11.0.12-jre-slim-buster
 EXPOSE 5000
-
-RUN mkdir -p /app
+COPY --from=builder /usr/src/app/build/libs/svc-java-0.0.1-SNAPSHOT-all.jar /app/
 WORKDIR /app
-
-COPY index.js /app/
-
-CMD ["node", "/app/index.js"]
+#CMD java -jar /app/svc-java-0.0.1-SNAPSHOT-all.jar
+ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom","-jar","/app/svc-java-0.0.1-SNAPSHOT-all.jar"]
