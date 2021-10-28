@@ -6,17 +6,12 @@ D:\hackathon\hack\bin\Debug\net6.0\hack.runtimeconfig.json
 D:\hackathon\hack\bin\Debug\net6.0\hack.dll
 D:\hackathon\hack\bin\Debug\net6.0\ref\hack.dll
 D:\hackathon\hack\bin\Debug\net6.0\hack.pdb
-D:\hackathon\hack\bin\Debug\net6.0\Microsoft.OpenApi.dll
-D:\hackathon\hack\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
-D:\hackathon\hack\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
-D:\hackathon\hack\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 D:\hackathon\hack\obj\Debug\net6.0\hack.GlobalUsings.g.cs
 D:\hackathon\hack\obj\Debug\net6.0\hack.csproj.AssemblyReference.cache
 D:\hackathon\hack\obj\Debug\net6.0\hack.GeneratedMSBuildEditorConfig.editorconfig
 D:\hackathon\hack\obj\Debug\net6.0\hack.AssemblyInfoInputs.cache
 D:\hackathon\hack\obj\Debug\net6.0\hack.AssemblyInfo.cs
 D:\hackathon\hack\obj\Debug\net6.0\hack.csproj.CoreCompileInputs.cache
-D:\hackathon\hack\obj\Debug\net6.0\hack.MvcApplicationPartsAssemblyInfo.cs
 D:\hackathon\hack\obj\Debug\net6.0\hack.MvcApplicationPartsAssemblyInfo.cache
 D:\hackathon\hack\obj\Debug\net6.0\staticwebassets.build.json
 D:\hackathon\hack\obj\Debug\net6.0\staticwebassets.development.json
