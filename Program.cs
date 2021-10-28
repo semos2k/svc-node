@@ -8,8 +8,6 @@ builder.Services.AddHttpClient("client", cfg => {
 
 var app = builder.Build();
 
-Environment.SetEnvironmentVariable("ASPNETCORE_URLS", "http://localhost:5000");
-
 app.MapGet("/", async (IHttpClientFactory clientFactory, HttpContext context) => {
     var query = context.Request.Query["number"];
     var client = clientFactory.CreateClient("client");
@@ -20,4 +18,4 @@ app.MapGet("/", async (IHttpClientFactory clientFactory, HttpContext context) =>
 app.MapGet("/health", () => "Ok");
 
 
-app.Run();
+app.Run("http://localhost:5000");
