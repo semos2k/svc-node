@@ -1,8 +1,8 @@
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHttpClient("client", cfg => {
-    var hostName = Environment.GetEnvironmentVariable("SVC_API_HOSTNAME");
-    var port = Environment.GetEnvironmentVariable("SVC_API_PORT");
+    var hostName = Environment.GetEnvironmentVariable("SVC_API_HOSTNAME") ?? "otrohost";
+    var port = Environment.GetEnvironmentVariable("SVC_API_PORT") ?? "5000";
     cfg.BaseAddress = new Uri($"http://{hostName}:{port}");
 });
 
@@ -15,7 +15,7 @@ app.MapGet("/", async (IHttpClientFactory clientFactory, HttpContext context) =>
     return await response.Content.ReadAsStringAsync();   
 });
 
-app.MapGet("/health", () => "Ok");
+app.MapGet("/healthz", () => "Ok");
 
 
-app.Run("http://localhost:5000");
+app.Run("http://*:5000");
