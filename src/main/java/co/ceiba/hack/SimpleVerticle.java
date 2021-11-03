@@ -4,6 +4,7 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.ext.web.client.HttpResponse;
 import io.vertx.ext.web.client.WebClient;
+import io.vertx.ext.web.client.WebClientOptions;
 
 public class SimpleVerticle extends AbstractVerticle {
     private <T> T envVar(String name, T defaultValue){
@@ -16,8 +17,12 @@ public class SimpleVerticle extends AbstractVerticle {
         final Integer SVC_API_PORT = Integer.parseInt(envVar("SVC_API_PORT", "4000"));
 
         System.out.println("endpoint: " + SVC_API_HOSTNAME + ":" + SVC_API_PORT);
+        WebClientOptions options = new WebClientOptions()
+                .setMaxPoolSize(10)
+                .setKeepAlive(true)
+                ;
 
-        WebClient client = WebClient.create(vertx);
+        WebClient client = WebClient.create(vertx, options);
 
         vertx.createHttpServer().requestHandler(req -> {
             String path = req.path().toString();
