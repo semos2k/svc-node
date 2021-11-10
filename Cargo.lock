@@ -8,6 +8,7 @@ version = "0.1.0"
 dependencies = [
  "bytes",
  "hyper",
+ "lazy_static",
  "tokio",
 ]
 
